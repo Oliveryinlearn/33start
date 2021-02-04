@@ -16,7 +16,10 @@
                 <ss-search/>
             </div>
             <!--右侧部分-->
-            <div class="right-container"></div>
+            <div class="right-container">
+                <div class="nav-style setting-icon"></div>
+                <div class="nav-style setting-user"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -64,13 +67,13 @@ $navHeight: 3.25rem;
 
     width: 100%;
     height: $navHeight;
-    padding: 0 3rem;
+    // padding: 0 3rem;
     box-sizing: border-box;
     @include flexLayout();
 
     border-bottom: 1px solid $borderLine;
     .nav-container {
-        width: 100rem;
+        width: 90rem;
         height: 100%;
         @include flexLayout(space-between);
     }
@@ -82,7 +85,7 @@ $navHeight: 3.25rem;
         height: 100%;
     }
     .nav-ul-container {
-        @include flexLayout();
+        @include flexLayout(flex-start);
         li {
             position: relative;
             top: 0;
@@ -104,8 +107,6 @@ $navHeight: 3.25rem;
             cursor: pointer;
         }
         li.is-active {
-            top: -2px;
-
             color: $main-theme-color;
         }
     }
@@ -114,6 +115,19 @@ $navHeight: 3.25rem;
 
         width: calc(100% - 24rem);
         height: 2.05rem;
+    }
+    .right-container {
+        @include flexLayout(flex-end);
+
+        .nav-style {
+            width: 2.05rem;
+            height: 2.05rem;
+            background-color: $gray;
+            border-radius: 50%;
+        }
+        .nav-style.setting-icon {
+            margin-right: 1.5rem;
+        }
     }
 }
 </style>

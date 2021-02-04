@@ -12,5 +12,9 @@ import HomeView from "./views/index.vue";
 export default class Home extends Vue {}
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
+#app {
+    width: 100%;
+    height: 100%;
+}
 </style>

@@ -1,5 +1,5 @@
-import ssSearch from "./Search/index";
-import ssInput from "./Input/index";
+import ssSearch from "./SsSearch/index";
+import ssInput from "./SsInput/index";
 
 const components = [ssSearch, ssInput];
 
