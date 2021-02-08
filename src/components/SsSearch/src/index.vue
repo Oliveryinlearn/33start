@@ -19,12 +19,12 @@
         </el-dropdown>
         <ss-input
             class="ss-input-container"
-            type="text"
+            type="search"
             v-model:value="iValue"
             :placeholder="iPlaceholder"
             @keyup.enter="handleSearch"
+            @handleSearch="handleSearch"
         />
-        <!-- <button class="icon iconfont icon-magnifier" @click="upFilter"></button>-->
     </div>
 </template>
 

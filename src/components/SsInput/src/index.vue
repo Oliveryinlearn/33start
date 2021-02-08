@@ -6,15 +6,25 @@
             @input="handleInput"
             :placeholder="placeholder"
         >
+        <ss-icon
+            v-if="type === 'search'"
+            :icon="value?'icon-cha1':'icon-search'"
+            @click="handleIcon(value)"
+            class="ss-icon-style"
+        />
     </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, computed, ref, watch } from "vue";
+import SsIcon from "../../SsIcon/src/index.vue";
 
 export default defineComponent({
     name: "ss-inpput",
-    emits: ["update:value", "input"],
+    emits: ["update:value", "handleSearch"],
+    components: {
+        SsIcon
+    },
     props: {
         value: {
             type: String,
@@ -35,19 +45,16 @@ export default defineComponent({
             context.emit("update:value", e.target.value);
         }
 
-        // const inputVal = computed({
-        //     get: value => {
-        //         return value;
-        //     },
-        //     set: value => {
-        //         console.log(value);
-        //         context.emit("update:value", value);
-        //     }
-        // });
-
+        function handleIcon(value: string): void {
+            if (!value) {
+                context.emit("handleSearch");
+            } else {
+                context.emit("update:value", "");
+            }
+        }
         return {
-            // inputVal
-            handleInput
+            handleInput,
+            handleIcon
         };
     }
 });
@@ -62,6 +69,7 @@ export default defineComponent({
     position: relative;
     width: 100%;
     height: 100%;
+    @include flexLayout();
 
     .ss-input-content {
         width: 100%;
@@ -80,6 +88,15 @@ export default defineComponent({
     }
     .ss-input-content:focus {
         outline: none;
+    }
+
+    .ss-icon-style {
+        transition: all 0.2s;
+    }
+
+    .ss-icon-style:hover {
+        cursor: pointer;
+        color: $sub-text;
     }
 }
 </style>

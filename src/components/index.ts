@@ -1,7 +1,9 @@
 import ssSearch from "./SsSearch/index";
 import ssInput from "./SsInput/index";
+import ssRadio from "./SsRadio/index";
+import ssIcon from "./SsIcon/index";
 
-const components = [ssSearch, ssInput];
+const components = [ssSearch, ssInput, ssRadio, ssIcon];
 
 //全局注册
 const install = function(Vue: any) {
@@ -15,5 +17,7 @@ export { ssSearch, ssInput };
 export default {
 	install,
 	ssSearch,
-	ssInput
+	ssInput,
+	ssRadio,
+	ssIcon
 };
