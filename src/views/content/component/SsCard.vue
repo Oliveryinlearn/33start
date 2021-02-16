@@ -1,15 +1,11 @@
 <template>
-    <div :class="['ss-card','loading']">
-        <div class="main-img">
-            <!-- <img src=""> -->
+    <div :class="['ss-card',{'loading':!data}]" @click="handleUrl(data.url)">
+        <div class="main-img loading">
+            <img :src="imgShowSrc(data.img)">
+            <!-- <img> -->
         </div>
-        <h4></h4>
-        <div class="description"></div>
-        <!-- <div class="next-img">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>-->
+        <h4>{{data.title}}</h4>
+        <div class="description">{{data.info}}</div>
     </div>
 </template>
 
@@ -25,8 +21,28 @@ export default defineComponent({
             }
         }
     },
-    setup(props) {
-        console.log(1);
+    setup() {
+        /**
+         * 点击快捷方式后的跳转
+         * @params {String} value 点击对应的值
+         */
+        function handleUrl(url: string): void {
+            //是否有值
+            if (url === "") return;
+            //打开页签
+            window.open(url);
+        }
+
+        /**
+         * 获取图片路径
+         */
+        function imgShowSrc(src: string) {
+            return require(`../../../assets/images/${src}`);
+        }
+        return {
+            handleUrl,
+            imgShowSrc
+        };
     }
 });
 </script>
@@ -53,38 +69,42 @@ $borderRadius: 4px;
     transition: all 0.2s;
 
     .main-img {
-        width: 13rem;
-        height: 13rem;
+        width: 13.165rem;
+        height: 13.165rem;
         border-radius: $borderRadius;
         margin-bottom: 0.5rem;
-    }
-    .next-img {
-        display: flex;
-        width: 100%;
-        height: 4rem;
-
-        justify-content: space-between;
-
-        & > div {
-            width: 4rem;
-            height: 4rem;
-            margin-right: 0.5rem;
-            border-radius: $borderRadius;
-
-            background-color: $gray-2;
+        img {
+            width: 100%;
+            height: 100%;
         }
-        & > div:nth-child(3n) {
-            margin-right: 2px;
+        img[src=""],
+        img:not([src]) {
+            opacity: 0;
         }
     }
     h4 {
         width: 100%;
+        height: 1.5rem;
+        line-height: 1.5rem;
 
         margin-top: 0.7rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.2rem;
+        box-sizing: border-box;
+        padding-left: 4px;
+
+        color: $main-text;
+        font-weight: bold;
+        font-size: 0.95rem;
     }
     .description {
         width: 100%;
+
+        box-sizing: border-box;
+        padding: 0 4px;
+
+        color: $t-level-text;
+        line-height: 1.4rem;
+        font-size: 0.8rem;
     }
 }
 .ss-card:hover {
@@ -116,12 +136,33 @@ $borderRadius: 4px;
         }
     }
     h4 {
-        min-height: 1.5rem;
         animation-delay: 0.05s;
     }
     .description {
         min-height: 3rem;
         animation-delay: 0.06s;
+    }
+}
+.ss-card {
+    .loading {
+        background-color: $gray-2;
+
+        background: linear-gradient(
+                100deg,
+                rgba(255, 255, 255, 0) 40%,
+                rgba(255, 255, 255, 0.5) 50%,
+                rgba(255, 255, 255, 0) 60%
+            )
+            $gray;
+        background-size: 200% 100%;
+        background-position-x: 120%;
+
+        animation: 1s loading ease-in-out infinite;
+    }
+    @keyframes loading {
+        to {
+            background-position-x: -20%;
+        }
     }
 }
 </style>

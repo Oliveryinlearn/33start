@@ -1,5 +1,7 @@
 <template>
-    <home-view/>
+    <suspense>
+        <home-view/>
+    </suspense>
 </template>
 <script lang='ts'>
 import { Vue, Options } from "vue-class-component";

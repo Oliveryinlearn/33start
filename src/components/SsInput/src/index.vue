@@ -20,7 +20,7 @@ import { defineComponent, computed, ref, watch } from "vue";
 import SsIcon from "../../SsIcon/src/index.vue";
 
 export default defineComponent({
-    name: "ss-inpput",
+    name: "ss-input",
     emits: ["update:value", "handleSearch"],
     components: {
         SsIcon

@@ -136,12 +136,12 @@ export default defineComponent({
             }
         }
 
-        watch(
-            () => elInput.iValue,
-            value => {
-                console.log(value);
-            }
-        );
+        // watch(
+        //     () => elInput.iValue,
+        //     value => {
+        //         console.log(value);
+        //     }
+        // );
 
         return {
             ...toRefs(elDown),

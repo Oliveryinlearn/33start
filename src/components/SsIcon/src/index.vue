@@ -12,7 +12,7 @@ export default defineComponent({
             default: ""
         }
     },
-    name: "ss-button"
+    name: "ss-icon"
     // setup() {}
 });
 </script>

@@ -17,8 +17,12 @@
             </div>
             <!--右侧部分-->
             <div class="right-container">
-                <div class="nav-style setting-icon"></div>
-                <div class="nav-style setting-user"></div>
+                <div class="nav-style setting-icon">
+                    <ss-icon icon="icon-home"/>
+                </div>
+                <div class="nav-style setting-user">
+                    <ss-icon icon="icon-ziyuan"/>
+                </div>
             </div>
         </div>
     </div>
@@ -122,11 +126,26 @@ $navHeight: 3.25rem;
         .nav-style {
             width: 2.05rem;
             height: 2.05rem;
-            background-color: $gray;
+
+            // background-color: $gray;
             border-radius: 50%;
+
+            text-align: center;
+            line-height: 2.2rem;
+
+            span {
+                font-size: 1.2rem;
+                color: $t-level-text;
+            }
+        }
+        .nav-style:hover {
+            cursor: pointer;
+            span {
+                color: $t-level2-text;
+            }
         }
         .nav-style.setting-icon {
-            margin-right: 1.5rem;
+            margin-right: 0.5rem;
         }
     }
 }

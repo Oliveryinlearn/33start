@@ -4,7 +4,7 @@
             <li
                 v-for="item in nav"
                 :key="item.value"
-                @click="handleClick(item.value)"
+                @click="handleClick(item)"
                 :class="[{'is-active':item.value===selected}]"
             >
                 <span>{{`${item.title}`}}</span>
@@ -17,8 +17,6 @@
 <script lang='ts'>
 import { defineComponent, reactive, toRefs } from "vue";
 
-//引入数据
-import { filterList } from "@/mock/index.ts";
 //引入类型判断
 import { Filter } from "@/type/index";
 
@@ -29,18 +27,26 @@ interface FilterNav {
 
 export default defineComponent({
     emits: ["handleNav"],
+    props: {
+        data: {
+            type: Object,
+            default: () => {
+                return {};
+            }
+        }
+    },
     setup(props, context) {
         //定义筛选列表的内容
-        const data: FilterNav = {
-            nav: filterList, //列表
-            selected: filterList[0].value //选中项
+        const data: any = {
+            nav: props.data, //列表
+            selected: props.data[1].value //选中项
         };
         //转成响应式对象
         const dataRet = reactive<FilterNav>(data);
         //切换
-        function handleClick(value: string): void {
-            dataRet.selected = value;
-            context.emit("handleNav", value);
+        function handleClick(item: Filter): void {
+            dataRet.selected = item.value;
+            context.emit("handleNav", item);
         }
         return {
             ...toRefs(dataRet),
@@ -74,7 +80,7 @@ export default defineComponent({
         width: 100%;
         @include flexLayout(flex-start);
 
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         color: $main-text;
         li {
             position: relative;

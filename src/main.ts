@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 
 //引入日志打印
-import log from "./utils/index";
+import log from "./plugins/utils";
 
 //引入element-plus
 import ElementPlus from "element-plus";

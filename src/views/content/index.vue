@@ -1,6 +1,6 @@
 <template>
-    <div class="ss-card-container">
-        <ss-card/>
+    <div class="ss-card-container" @dblclick.self="showSearch">
+        <ss-card v-for="(item,index) in data" :key="index" :data="item"/>
     </div>
 </template>
 
@@ -20,8 +20,15 @@ export default defineComponent({
     components: {
         SsCard
     },
-    setup() {
-        console.log(1);
+    emits: ["showDialog"],
+    setup(props, content) {
+        //显示弹出
+        function showSearch(): void {
+            content.emit("showDialog");
+        }
+        return {
+            showSearch
+        };
     }
 });
 </script>
@@ -32,6 +39,7 @@ export default defineComponent({
 
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     & > div:nth-child(6n) {
         margin-right: 0;
     }
