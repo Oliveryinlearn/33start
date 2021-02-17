@@ -72,7 +72,7 @@ export default defineComponent({
 
 .search-container {
     width: 100%;
-    height: 4rem;
+    height: 4.2rem;
 
     border-radius: 4px;
     padding: 0.5rem;
@@ -82,7 +82,7 @@ export default defineComponent({
 
     .search-body {
         width: 100%;
-        height: 3rem;
+        height: 3.2rem;
 
         border-radius: 2px;
         background: $white;

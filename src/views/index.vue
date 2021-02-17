@@ -19,16 +19,14 @@
         <div class="ss-footer">
             尹竹群 版权所有 ©www.752746873.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICP备案号：
             <a
-                href="http://www.beian.miit.gov.cn"
+                href="https://beian.miit.gov.cn"
             >苏ICP备14047197号-5</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工信部备案管理系统网址：
             <a
-                href="http://www.beian.miit.gov.cn"
-            >www.beian.miit.gov.cn</a>
+                href="https://beian.miit.gov.cn"
+            >https://beian.miit.gov.cn</a>
         </div>
 
         <!--搜索-->
-        <!-- <el-dialog title="提示" v-model="isShowDialog" width="60%">
-        </el-dialog>-->
         <search-dialog :dialogVisible="isShowDialog" @cancel="handleSearch(false)"></search-dialog>
     </div>
 </template>
@@ -199,9 +197,12 @@ export default defineComponent({
         background-color: $gray;
         text-align: center;
         color: $t-bottom-text;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         a {
             color: $t-bottom-text;
+        }
+        a:hover {
+            color: $main-text;
         }
     }
 }
