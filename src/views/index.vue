@@ -77,14 +77,26 @@ export default defineComponent({
     async setup() {
         //卡片容器
         const sSContent = ref(null);
+        // let bsDom: any = null;
+
+        //初始化better-scroll
+        // function initScroll(): void {
+        //     bsDom = null;
+        //     const dom: any = sSContent.value;
+        //     console.log(dom);
+        //     dom.childNodes[0].removeAttribute("style");
+        //     console.log(dom.childNodes[0]);
+        //     bsDom = new BScroll(dom, {
+        //         click: true,
+        //         mouseWheel: true
+        //     });
+        //     console.log(bsDom);
+        // }
+
         //初始化卡牌容器
-        onMounted(() => {
-            const dom: any = sSContent.value;
-            new BScroll(dom, {
-                click: true,
-                mouseWheel: true
-            });
-        });
+        // onMounted(() => {
+        //     initScroll();
+        // });
 
         // 请求数据
         function getDataFunc(params: any) {
@@ -126,6 +138,10 @@ export default defineComponent({
         //切换标题
         function handleNav(value: NavType): void {
             cardData.value = value.children;
+
+            // console.log("刷新");
+            // initScroll();
+            // console.log(bsDom);
         }
 
         const isShowDialog = ref(false);
@@ -144,6 +160,20 @@ export default defineComponent({
             handleSearch
         };
     }
+    // data() {
+    //     return {
+    //         bsDom: null
+    //     };
+    // }
+    // methods: {
+    //     initScroll() {
+    //         const dom: any = this.$refs.sSContent;
+    //         new BScroll<any>(dom);
+    //     }
+    // },
+    // mounted() {
+    //     this.initScroll();
+    // }
 });
 </script>
 
@@ -169,19 +199,21 @@ export default defineComponent({
         left: 0;
 
         background-color: $gray;
+        overflow: auto;
 
         .ss-content {
             position: absolute;
             top: 6.875rem;
-            right: 0;
             bottom: 0;
-            left: 0;
-            overflow: hidden;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 90rem;
 
             .card-container {
-                width: 90rem;
-                // height: 20rem;
-                margin: 0 auto;
+                // width: 90rem;
+                // // height: 20rem;
+                // margin: 0 auto;
             }
         }
     }
@@ -193,6 +225,7 @@ export default defineComponent({
         left: 0;
 
         height: 2rem;
+        line-height: 2rem;
 
         background-color: $gray;
         text-align: center;

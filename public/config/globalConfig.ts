@@ -4,5 +4,5 @@ export default {
 	// mock数据模拟根路径
 	mockApiUrl: "/mock",
 	// 生产环境后台api的地址
-	baseURL: "http://localhost:8080"
+	baseURL: "http://www.752746873.com"
 };
