@@ -1,0 +1,248 @@
+.animate-bg-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	z-index: 1;
+	overflow: hidden;
+}
+
+.animate-bg-container > .animate-line {
+	position: absolute;
+
+	width: 2px;
+	border-radius: 2px;
+}
+
+/*线的动画**/
+.animate-bg-container > .animate-line.line-1 {
+	bottom: 100px;
+
+	height: 100px;
+
+	background: #4e73c1;
+	box-shadow: 0 2px 10px rgba(78, 115, 193, 1);
+
+	animation: lineAnimate 6s ease-in-out infinite;
+	-webkit-animation: lineAnimate 6s ease-in-out infinite;
+}
+
+@keyframes lineAnimate {
+	0% {
+		bottom: -100px;
+		opacity: 1;
+	}
+
+	80% {
+		opacity: 0;
+	}
+
+	100% {
+		bottom: 1000px;
+	}
+}
+
+@-webkit-keyframes lineAnimate {
+	0% {
+		bottom: -100px;
+		opacity: 1;
+	}
+
+	80% {
+		opacity: 0;
+	}
+
+	100% {
+		bottom: 1000px;
+	}
+}
+
+.animate-bg-container > .animate-line.line-2 {
+	bottom: -300px;
+
+	height: 300px;
+	width: 3px;
+
+	background: linear-gradient(rgba(78, 115, 193, 1), rgba(78, 115, 193, 0));
+	/* box-shadow: 0 2px 10px rgba(78, 115, 193, 1); */
+
+	animation: lineAnimate2 3s ease-in-out infinite;
+	-webkit-animation: lineAnimate2 3s ease-in-out infinite;
+}
+
+@keyframes lineAnimate2 {
+	0% {
+		bottom: -300px;
+		opacity: 1;
+	}
+
+	100% {
+		bottom: 1000px;
+		opacity: 0.2;
+	}
+}
+
+@-webkit-keyframes lineAnimate2 {
+	0% {
+		bottom: -300px;
+		opacity: 1;
+	}
+
+	100% {
+		bottom: 1000px;
+		opacity: 0.2;
+	}
+}
+
+.animate-bg-container > .animate-line.line-3 {
+	bottom: -200px;
+
+	height: 200px;
+
+	background: linear-gradient(rgba(78, 115, 193, 1), rgba(78, 115, 193, 0));
+	/* box-shadow: 0 2px 10px rgba(78, 115, 193, 1); */
+
+	animation: lineAnimate3 8s ease-in-out infinite;
+	-webkit-animation: lineAnimate3 8s ease-in-out infinite;
+}
+
+@keyframes lineAnimate3 {
+	0% {
+		bottom: -200px;
+		opacity: 1;
+	}
+
+	100% {
+		bottom: 1000px;
+		opacity: 0.4;
+	}
+}
+
+@-webkit-keyframes lineAnimate3 {
+	0% {
+		bottom: -200px;
+		opacity: 1;
+	}
+
+	100% {
+		bottom: 1000px;
+		opacity: 0.4;
+	}
+}
+.animate-bg-container > .animate-line.line-4 {
+	bottom: -400px;
+
+	width: 3px;
+	height: 400px;
+
+	background: linear-gradient(rgba(78, 115, 193, 1), rgba(78, 115, 193, 0));
+	/* box-shadow: 0 2px 10px rgba(78, 115, 193, 1); */
+
+	animation: lineAnimate4 12s ease-in-out infinite;
+	-webkit-animation: lineAnimate4 12s ease-in-out infinite;
+}
+
+@keyframes lineAnimate4 {
+	0% {
+		bottom: -400px;
+		opacity: 1;
+	}
+
+	100% {
+		bottom: 1000px;
+		opacity: 0.4;
+	}
+}
+
+@-webkit-keyframes lineAnimate4 {
+	0% {
+		bottom: -400px;
+		opacity: 1;
+	}
+
+	100% {
+		bottom: 1000px;
+		opacity: 0.4;
+	}
+}
+
+/**闪烁**/
+.animate-bg-container > .animate-star {
+	position: absolute;
+
+	border-radius: 50%;
+
+	background-color: #ffffff;
+	box-shadow: 0 4px 20px rgba(255, 255, 255, 1);
+}
+.animate-bg-container > .animate-star.star-1 {
+	width: 6px;
+	height: 6px;
+
+	animation: starAnimate1 3s ease-in-out infinite alternate;
+	-webkit-animation: starAnimate1 3s ease-in-out infinite alternate;
+}
+
+.animate-bg-container > .animate-star.star-3 {
+	width: 4px;
+	height: 4px;
+
+	animation: starAnimate1 2s ease-in-out infinite alternate;
+	-webkit-animation: starAnimate1 2s ease-in-out infinite alternate;
+}
+
+@keyframes starAnimate1 {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0.6;
+	}
+}
+
+@-webkit-keyframes starAnimate1 {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0.6;
+	}
+}
+
+.animate-bg-container > .animate-star.star-2 {
+	width: 2px;
+	height: 2px;
+
+	animation: starAnimate2 3s ease-in-out infinite alternate;
+	-webkit-animation: starAnimate2 3s ease-in-out infinite alternate;
+}
+.animate-bg-container > .animate-star.star-4 {
+	width: 4px;
+	height: 4px;
+
+	animation: starAnimate2 2s ease-in-out infinite alternate;
+	-webkit-animation: starAnimate2 2s ease-in-out infinite alternate;
+}
+@keyframes starAnimate2 {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0.8;
+	}
+}
+
+@-webkit-keyframes starAnimate2 {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0.8;
+	}
+}
