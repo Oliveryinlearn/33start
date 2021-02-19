@@ -18,7 +18,7 @@
 import { defineComponent, reactive, toRefs } from "vue";
 
 //引入类型判断
-import { Filter } from "@/type/index";
+import { Filter } from "@/type/index.ts";
 
 interface FilterNav {
     nav: Filter[];
@@ -58,11 +58,11 @@ export default defineComponent({
 
 <style scoped lang='scss'>
 //基本色
-@import "../../style/color.scss";
+@import "../../../style/color.scss";
 //公共样式
-@import "../../style/publicStyle.scss";
+@import "../../../style/publicStyle.scss";
 //主题
-@import "../../style/theme.scss";
+@import "../../../style/theme.scss";
 
 .ss-filter {
     width: 90rem;

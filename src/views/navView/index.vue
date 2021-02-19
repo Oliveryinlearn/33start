@@ -32,9 +32,14 @@
 import { defineComponent, ref } from "vue";
 //引入类型
 import { navList } from "./types/type";
+//引入路由函数
+import { useRouter } from "vue-router";
 
 export default defineComponent({
     setup(props: object, context: object) {
+        //初始化路由
+        const router = useRouter();
+
         const nav: navList[] = ["首页", "发现"];
         const selectedNav = ref<navList>(nav[0]);
 
@@ -46,6 +51,19 @@ export default defineComponent({
             //预处理，如果点击对tab跟上次一致，返回
             if (selectedNav.value === value) return;
             selectedNav.value = value;
+
+            switch (selectedNav.value) {
+                case nav[0]:
+                    router.push({
+                        path: "/"
+                    });
+                    break;
+                case nav[1]:
+                    router.push({
+                        path: "/discover"
+                    });
+                    break;
+            }
         }
 
         return {

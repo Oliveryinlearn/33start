@@ -105,6 +105,13 @@ export default defineComponent({
 
             elDown.dropVal = elDowmName(elData.elListData, value).value; //切换的值
             elDown.dropName = elDowmName(elData.elListData, value).name; //切换的名字
+
+            const localData: ElDownList = {
+                value: elDown.dropVal,
+                name: elDown.dropName
+            };
+            //必须使用JSON.stringify()转换一下
+            localStorage.setItem(LOCALSTORAGE_TEXT, JSON.stringify(localData));
         }
 
         /**

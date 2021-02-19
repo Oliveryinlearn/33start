@@ -37,7 +37,7 @@ export default defineComponent({
          * 获取图片路径
          */
         function imgShowSrc(src: string) {
-            return require(`../../../assets/images/${src}`);
+            return require(`../../../../assets/images/${src}`);
         }
         return {
             handleUrl,
@@ -49,7 +49,7 @@ export default defineComponent({
 
 <style scoped lang='scss'>
 //基本色
-@import "../../../style/color.scss";
+@import "../../../../style/color.scss";
 
 $borderRadius: 4px;
 .ss-card {

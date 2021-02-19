@@ -17,7 +17,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, reactive, toRefs } from "vue";
+import { defineComponent, ref, reactive, toRefs, watch, computed } from "vue";
 
 //输入框
 interface ElInput {
@@ -39,23 +39,71 @@ export default defineComponent({
         }
         const showDialog = ref(props.dialogVisible);
 
+        const searchType: string | null = localStorage.getItem("ssWebTypeVal"); //当前搜索浏览器类型的localStorage值
+
         /**
          * 输入框部分
          */
         const elInput = reactive<ElInput>({
             iValue: "",
-            iPlaceholder: "请输入搜索内容"
+            iPlaceholder: ""
         });
 
         function handleSearch(): void {
             const text: string = elInput.iValue;
+
             const searchEnginesContent = {
                 baidu: `https://www.baidu.com/s?wd='${text}'`,
                 google: `https://www.google.com/search?q=${text}&oq=${text}`
             };
 
-            window.open(searchEnginesContent.baidu);
+            if (searchType === null) {
+                window.open(searchEnginesContent.baidu);
+            } else {
+                const searchTypeObj = JSON.parse(searchType);
+                switch (searchTypeObj.value) {
+                    case "1": //百度
+                        window.open(searchEnginesContent.baidu);
+                        break;
+                    case "2": //谷歌
+                        window.open(searchEnginesContent.google);
+                        break;
+                    default:
+                        //其他，百度
+                        window.open(searchEnginesContent.baidu);
+                        break;
+                }
+            }
         }
+
+        //监听弹窗显示，判断其显示的文字
+        watch(
+            () => props.dialogVisible,
+            newVal => {
+                if (!newVal) return;
+                //获得的浏览器类型值
+                const curLocalPlaceholder = localStorage.getItem(
+                    "ssWebTypeVal"
+                );
+                const baiduText = "百度一下，你就知道",
+                    googleText = "Don't be evil",
+                    defaultText = "请输入搜索内容";
+
+                if (curLocalPlaceholder === null) {
+                    elInput.iPlaceholder = baiduText;
+                } else {
+                    const curSearchTypeObj = JSON.parse(curLocalPlaceholder);
+                    elInput.iPlaceholder =
+                        curSearchTypeObj.value === "1"
+                            ? baiduText
+                            : curSearchTypeObj.value === "2"
+                            ? googleText
+                            : defaultText;
+                }
+
+                // console.log(searchTypeObj);
+            }
+        );
         return {
             cancelDialog,
             showDialog,
@@ -68,7 +116,7 @@ export default defineComponent({
 
 <style scoped lang='scss'>
 //基本色
-@import "../../style/color.scss";
+@import "../../../style/color.scss";
 
 .search-container {
     width: 100%;
