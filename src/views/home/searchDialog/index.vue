@@ -17,7 +17,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, reactive, toRefs, watch, computed } from "vue";
+import { defineComponent, ref, reactive, toRefs, watch } from "vue";
 
 //输入框
 interface ElInput {
@@ -25,6 +25,8 @@ interface ElInput {
     iPlaceholder: string;
 }
 
+//localstorage存储的名字
+const LOCALSTORAGE_TEXT = "ssWebTypeVal";
 export default defineComponent({
     props: {
         dialogVisible: {
@@ -39,8 +41,6 @@ export default defineComponent({
         }
         const showDialog = ref(props.dialogVisible);
 
-        const searchType: string | null = localStorage.getItem("ssWebTypeVal"); //当前搜索浏览器类型的localStorage值
-
         /**
          * 输入框部分
          */
@@ -51,6 +51,10 @@ export default defineComponent({
 
         function handleSearch(): void {
             const text: string = elInput.iValue;
+
+            const searchType: string | null = localStorage.getItem(
+                LOCALSTORAGE_TEXT
+            ); //当前搜索浏览器类型的localStorage值
 
             const searchEnginesContent = {
                 baidu: `https://www.baidu.com/s?wd='${text}'`,
@@ -83,8 +87,9 @@ export default defineComponent({
                 if (!newVal) return;
                 //获得的浏览器类型值
                 const curLocalPlaceholder = localStorage.getItem(
-                    "ssWebTypeVal"
+                    LOCALSTORAGE_TEXT
                 );
+                //提示文字
                 const baiduText = "百度一下，你就知道",
                     googleText = "Don't be evil",
                     defaultText = "请输入搜索内容";
