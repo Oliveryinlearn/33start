@@ -2,10 +2,10 @@
     <div class="ss-filter">
         <ul class="ss-filter-ul">
             <li
-                v-for="item in nav"
+                v-for="item in navList"
                 :key="item.value"
                 @click="handleClick(item)"
-                :class="[{'is-active':item.value===selected}]"
+                :class="[{'is-active':item.selected}]"
             >
                 <span>{{`${item.title}`}}</span>
                 <span class="ss-filter-number">{{`${item.number}`}}</span>
@@ -15,42 +15,43 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs, computed } from "vue";
 
 //引入类型判断
-import { Filter } from "@/type/index.ts";
-
-interface FilterNav {
-    nav: Filter[];
-    selected: string;
-}
+import { Filter, FilterNav } from "@/type/index.ts";
+import { useStore } from "vuex";
 
 export default defineComponent({
     emits: ["handleNav"],
-    props: {
-        data: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        }
-    },
     setup(props, context) {
+        const store = useStore();
+
+        //获得标题
+        const navList = computed(() => {
+            return store.getters["data/getNavList"];
+        });
+
         //定义筛选列表的内容
-        const data: any = {
-            nav: props.data, //列表
-            selected: props.data[1].value //选中项
-        };
+        // const data: any = {
+        //     nav: navList.value, //列表
+        //     selected: props.data[1].value //选中项
+        // };
+
         //转成响应式对象
-        const dataRet = reactive<FilterNav>(data);
+        // const dataRet = reactive<FilterNav>(data);
+
         //切换
         function handleClick(item: Filter): void {
-            dataRet.selected = item.value;
+            //更新到vuex保存
+            store.commit("data/setNavSelected", item.value);
+
             context.emit("handleNav", item);
         }
+
         return {
-            ...toRefs(dataRet),
-            handleClick
+            // ...toRefs(dataRet),
+            handleClick,
+            navList
         };
     }
 });

@@ -17,10 +17,10 @@
             </div>
             <!--右侧部分-->
             <div class="right-container">
-                <div class="nav-style setting-icon">
+                <div class="nav-style setting-icon" @click="handleSetting">
                     <ss-icon icon="icon-home"/>
                 </div>
-                <div class="nav-style setting-user">
+                <div class="nav-style setting-user" @click="handleUser">
                     <ss-icon icon="icon-ziyuan"/>
                 </div>
             </div>
@@ -34,6 +34,7 @@ import { defineComponent, ref } from "vue";
 import { navList } from "./types/type";
 //引入路由函数
 import { useRouter } from "vue-router";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
     setup(props: object, context: object) {
@@ -66,10 +67,32 @@ export default defineComponent({
             }
         }
 
+        /**
+         * 点击用户
+         */
+        function handleUser(): void {
+            ElMessage.warning({
+                message: "抱歉，当前还不支持用户登录",
+                type: "warning"
+            });
+        }
+
+        /**
+         * 设置
+         */
+        function handleSetting(): void {
+            ElMessage.success({
+                message: "进入设置",
+                type: "success"
+            });
+        }
+
         return {
             nav,
             selectedNav,
-            handleNav
+            handleNav,
+            handleUser,
+            handleSetting
         };
     }
 });

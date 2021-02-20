@@ -3,7 +3,7 @@
         <!--内容-->
         <div class="ss-container" @dblclick.self="handleSearch(true)">
             <!--内容筛选-->
-            <filter-view @handleNav="handleNav" :data="navData"/>
+            <filter-view @handleNav="handleNav"/>
             <div class="ss-content" ref="sSContent" @dblclick.self="handleSearch(true)">
                 <div class="card-container">
                     <!--内容显示组件-->
@@ -39,26 +39,12 @@ import SearchDialog from "./searchDialog/index.vue";
 import { getData } from "../../api/data";
 import BScroll from "better-scroll";
 
-//内容
-interface DataChildrenType {
-    title: string;
-    img: string;
-    info: string;
-    url: string;
-}
-//请求到的数据类型
-interface DataType {
-    title: string;
-    type: string;
-    children: DataChildrenType[];
-}
-//标题的数据
-interface NavType {
-    title: string;
-    number: number;
-    value: string;
-    children: DataChildrenType[];
-}
+//引入vuex
+import { useStore } from "vuex";
+
+//引入类型
+import { DataChildrenType, DataType, NavType } from "../../type/index";
+
 //排除在外的类别
 const OUT_TOTAL = ["commonly"];
 
@@ -71,6 +57,8 @@ export default defineComponent({
     async setup() {
         //卡片容器
         const sSContent = ref(null);
+        //使用vuex
+        const store = useStore();
         // let bsDom: any = null;
 
         //初始化better-scroll
@@ -110,24 +98,32 @@ export default defineComponent({
             }, [])
         });
 
+        //存储卡片数据
+        store.dispatch("data/setHomeData", data);
+
         //请求到的数据转成
-        const navDataList = (list: DataType[]): NavType[] => {
-            return list.map(el => {
-                return {
-                    title: el.title,
-                    number: el.children.length,
-                    value: el.type,
-                    children: el.children
-                };
-            });
-        };
-        const navDataArr = navDataList(data);
+        // const navDataList = (list: DataType[]): NavType[] => {
+        //     return list.map(el => {
+        //         return {
+        //             title: el.title,
+        //             number: el.children.length,
+        //             value: el.type,
+        //             children: el.children
+        //         };
+        //     });
+        // };
+        // const navDataArr = navDataList(data);
 
         //定义响应式标题对象
-        const navData = ref<NavType[]>(navDataArr);
+        // const navData = ref<NavType[]>(navDataArr);
 
-        //定义响应式内容
-        const cardData = ref<DataChildrenType[]>(data[1].children);
+        //初始化默认显示的卡片
+        const getterStoreNav = store.getters["data/getNavList"].filter(
+            (el: NavType) => {
+                return el.selected;
+            }
+        );
+        const cardData = ref<DataChildrenType[]>(getterStoreNav[0].children);
 
         //切换标题
         function handleNav(value: NavType): void {
@@ -142,7 +138,7 @@ export default defineComponent({
         }
         return {
             handleNav,
-            navData,
+            // navData,
             cardData,
             sSContent,
             isShowDialog,
