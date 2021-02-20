@@ -9,6 +9,7 @@
                         :placeholder="iPlaceholder"
                         @keyup.enter="handleSearch"
                         @handleSearch="handleSearch"
+                        :focus="true"
                     />
                 </div>
             </div>
@@ -40,6 +41,8 @@ export default defineComponent({
             content.emit("cancel");
         }
         const showDialog = ref(props.dialogVisible);
+
+        const focusVal = ref(false);
 
         /**
          * 输入框部分
@@ -84,7 +87,15 @@ export default defineComponent({
         watch(
             () => props.dialogVisible,
             newVal => {
-                if (!newVal) return;
+                if (!newVal) {
+                    //失去焦点
+                    // focusVal.value = false;
+                    return;
+                }
+
+                //获得焦点
+                // focusVal.value = true;
+                // console.log(focusVal.value);
                 //获得的浏览器类型值
                 const curLocalPlaceholder = localStorage.getItem(
                     LOCALSTORAGE_TEXT
@@ -113,7 +124,8 @@ export default defineComponent({
             cancelDialog,
             showDialog,
             ...toRefs(elInput),
-            handleSearch
+            handleSearch,
+            focusVal
         };
     }
 });

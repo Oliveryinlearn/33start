@@ -5,6 +5,7 @@
             class="ss-input-content"
             @input="handleInput"
             :placeholder="placeholder"
+            v-focus="focus"
         >
         <ss-icon
             v-if="type === 'search'"
@@ -16,7 +17,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, computed, ref, watch } from "vue";
+import { defineComponent, computed, ref, watch, nextTick } from "vue";
 import SsIcon from "../../SsIcon/src/index.vue";
 
 export default defineComponent({
@@ -37,6 +38,10 @@ export default defineComponent({
         type: {
             type: String,
             default: "text"
+        },
+        focus: {
+            type: Boolean,
+            default: false
         }
     },
     setup(props, context) {
@@ -56,6 +61,29 @@ export default defineComponent({
             handleInput,
             handleIcon
         };
+    },
+    directives: {
+        focus: {
+            mounted(el, binding) {
+                //绑定的值
+                const val = binding.value;
+                if (!val) return;
+
+                nextTick(() => {
+                    el.focus();
+                });
+            },
+            updated(el, binding) {
+                //绑定的值
+                const val = binding.value;
+                if (!val) return;
+                nextTick(() => {
+                    //判断是否已经获取焦点
+                    if (el === document.activeElement) return;
+                    el.focus();
+                });
+            }
+        }
     }
 });
 </script>

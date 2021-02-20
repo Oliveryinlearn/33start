@@ -42,6 +42,12 @@
 				"img": "wangyiyun.png",
 				"info": "一个专注职业技能提升的在线学习平台",
 				"url": "https://study.163.com/"
+			},
+			{
+				"title": "CSDN",
+				"img": "CSDN.png",
+				"info": "CSDN是全球知名中文IT技术交流平台",
+				"url": "https://bbs.csdn.net/"
 			}
 		]
 	},
@@ -53,6 +59,12 @@
 				"img": "mdn.png",
 				"info": "搜索MDN Web 开发技术 Web 开发技术 ",
 				"url": "https://developer.mozilla.org/zh-CN/docs/Web"
+			},
+			{
+				"title": "CSDN",
+				"img": "CSDN.png",
+				"info": "CSDN是全球知名中文IT技术交流平台",
+				"url": "https://bbs.csdn.net/"
 			},
 			{
 				"title": "Gitee",
@@ -228,7 +240,12 @@
 	{
 		"title": "游戏社区",
 		"type": "game",
-		"children": []
+		"children": [{
+			"title": "战网",
+			"img": "zhanwang.png",
+			"info": "暴雪推出的游戏管理平台，旗下拥有众多热门游戏",
+			"url": "https://www.blizzardgames.cn/zh/"
+		}]
 	},
 	{
 		"title": "啊哈哈哈",
