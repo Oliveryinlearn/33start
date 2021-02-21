@@ -46,7 +46,7 @@ import { useStore } from "vuex";
 import { DataChildrenType, DataType, NavType } from "../../type/index";
 
 //排除在外的类别
-const OUT_TOTAL = ["commonly"];
+const OUT_TOTAL = ["commonly", "office"];
 
 export default defineComponent({
     components: {
@@ -118,12 +118,12 @@ export default defineComponent({
         // const navData = ref<NavType[]>(navDataArr);
 
         //初始化默认显示的卡片
-        const getterStoreNav = store.getters["data/getNavList"].filter(
-            (el: NavType) => {
-                return el.selected;
-            }
-        );
-        const cardData = ref<DataChildrenType[]>(getterStoreNav[0].children);
+        // const getterStoreNav = store.getters["data/getNavList"].filter(
+        //     (el: NavType) => {
+        //         return el.selected;
+        //     }
+        // );
+        const cardData = ref<DataChildrenType[]>([]);
 
         //切换标题
         function handleNav(value: NavType): void {

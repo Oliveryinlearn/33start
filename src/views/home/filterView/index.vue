@@ -15,22 +15,48 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, reactive, toRefs, computed } from "vue";
+import { defineComponent, reactive, toRefs, computed, watch } from "vue";
 
 //引入类型判断
-import { Filter, FilterNav } from "@/type/index.ts";
+import { Filter, FilterNav, NavType } from "@/type/index.ts";
 import { useStore } from "vuex";
+
+import setting from "@/setting";
 
 export default defineComponent({
     emits: ["handleNav"],
     setup(props, context) {
         const store = useStore();
 
+        //设置默认选项
+        // console.log(setting.defaultSelected);
+        store.commit("data/setNavSelected", setting.defaultSelected);
+
         //获得标题
         const navList = computed(() => {
             return store.getters["data/getNavList"];
         });
 
+        //过滤出selected对应的标签
+        function filterNav(arr: NavType[], val: string) {
+            return arr.filter(el => {
+                return el.value === val;
+            });
+        }
+
+        //监听选中项
+        watch(
+            () => store.getters["data/getSelected"],
+            val => {
+                const navData = filterNav(navList.value, val);
+
+                context.emit("handleNav", navData[0]);
+                // console.log(navData);
+            },
+            {
+                immediate: true
+            }
+        );
         //定义筛选列表的内容
         // const data: any = {
         //     nav: navList.value, //列表
@@ -45,7 +71,7 @@ export default defineComponent({
             //更新到vuex保存
             store.commit("data/setNavSelected", item.value);
 
-            context.emit("handleNav", item);
+            // context.emit("handleNav", item);
         }
 
         return {

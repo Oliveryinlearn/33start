@@ -22,6 +22,9 @@ export default {
 					children: el.children
 				};
 			});
+		},
+		getSelected(state: any) {
+			return state.selected;
 		}
 	},
 	mutations: {
