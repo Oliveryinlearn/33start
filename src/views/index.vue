@@ -5,7 +5,9 @@
 
         <suspense>
             <div class="ss-content-blog">
-                <router-view></router-view>
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
             </div>
         </suspense>
     </div>

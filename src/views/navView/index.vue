@@ -17,10 +17,10 @@
             </div>
             <!--右侧部分-->
             <div class="right-container">
-                <div class="nav-style setting-icon" @click="handleSetting">
+                <div class="nav-style setting-icon" @click="handleNav('setting')">
                     <ss-icon icon="icon-home"/>
                 </div>
-                <div class="nav-style setting-user" @click="handleUser">
+                <div class="nav-style setting-user" @click="handleNav('user')">
                     <ss-icon icon="icon-ziyuan"/>
                 </div>
             </div>
@@ -41,7 +41,7 @@ export default defineComponent({
         //初始化路由
         const router = useRouter();
 
-        const nav: navList[] = ["首页", "发现"];
+        const nav: navList[] = ["首页", "便签"];
         const selectedNav = ref<navList>(nav[0]);
 
         /**
@@ -64,35 +64,24 @@ export default defineComponent({
                         path: "/discover"
                     });
                     break;
+                case "setting":
+                    router.push({
+                        path: "/setting"
+                    });
+                    break;
+                case "user":
+                    ElMessage.warning({
+                        message: "抱歉，当前还不支持用户登录",
+                        type: "warning"
+                    });
+                    break;
             }
-        }
-
-        /**
-         * 点击用户
-         */
-        function handleUser(): void {
-            ElMessage.warning({
-                message: "抱歉，当前还不支持用户登录",
-                type: "warning"
-            });
-        }
-
-        /**
-         * 设置
-         */
-        function handleSetting(): void {
-            ElMessage.success({
-                message: "进入设置",
-                type: "success"
-            });
         }
 
         return {
             nav,
             selectedNav,
-            handleNav,
-            handleUser,
-            handleSetting
+            handleNav
         };
     }
 });

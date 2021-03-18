@@ -5,9 +5,11 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 
-import SsCard from "./component/SsCard.vue";
+import SsCard from "./component/SsCard/index.vue";
+
+import { wateVNode, DataType } from "@/components/SsWaterFall/ts/vNode";
 
 export default defineComponent({
     name: "ss-card-container",
@@ -22,6 +24,16 @@ export default defineComponent({
     },
     emits: ["showDialog"],
     setup(props, content) {
+        //监听渲染的数据
+        watch(
+            () => props.data,
+            value => {
+                //对数据进行转化，转成虚拟节点
+                const data: any = value;
+
+                const vm = wateVNode(data);
+            }
+        );
         //显示弹出
         function showSearch(): void {
             content.emit("showDialog");
@@ -30,18 +42,17 @@ export default defineComponent({
             showSearch
         };
     }
+    // mounted() {
+    //     console.log(this.data);
+    // }
 });
 </script>
 
 <style scoped lang='scss'>
 .ss-card-container {
-    position: relative;
-
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    & > div:nth-child(6n) {
-        margin-right: 0;
-    }
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
 }
 </style>

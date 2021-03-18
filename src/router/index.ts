@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/home/index.vue";
 
-import setting from "../setting";
-
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/",
@@ -13,12 +11,16 @@ const routes: Array<RouteRecordRaw> = [
 		path: "/discover",
 		name: "discover",
 		component: () => import("../views/discover/index.vue")
+	},
+	{
+		path: "/setting",
+		name: "setting",
+		component: () => import("../views/set/index.vue")
 	}
 ];
 
 const router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
-	// history: createWebHistory(setting.routerMode),
 	routes
 });
 

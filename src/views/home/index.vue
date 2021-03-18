@@ -29,7 +29,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, nextTick } from "vue";
 //引入筛选
 import FilterView from "./filterView/index.vue";
 //引入内容显示
@@ -44,6 +44,9 @@ import { useStore } from "vuex";
 
 //引入类型
 import { DataChildrenType, DataType, NavType } from "../../type/index";
+
+//引入懒加载
+import { LazyImg } from "@/utils/index";
 
 //排除在外的类别
 const OUT_TOTAL = ["commonly", "office"];
@@ -75,9 +78,39 @@ export default defineComponent({
         //     console.log(bsDom);
         // }
 
+        /**
+         * 判断DOM是否在视窗内
+         */
+        // function checkImg() {
+        //     //检测dom上是否有data-src属性
+        //     function loadImg() {
+        //         //获取img的DOM对象
+        //         const DOM_TAR = imgDom.value;
+        //         //获取dom上的自定义属性data-src
+        //         const dataSrc = DOM_TAR.getAttribute("data-src");
+        //         //判断是否存在自定义属性data-src
+        //         if (!dataSrc) return;
+
+        //         const imgDomTop = DOM_TAR.getBoundingClientRect().top;
+
+        //         const visibleBottom =
+        //             window.scrollY + document.documentElement.clientHeight;
+        //     }
+
+        //     //加载图片
+        //     loadImg();
+        // }
+
+        //监听滚动条
+        // function handleScroll() {
+        //     console.log(dom.querySelectorAll("img"));
+        // }
+
         //初始化卡牌容器
         // onMounted(() => {
-        //     initScroll();
+        //     //选择dom
+        //     // dom = document.querySelector(".ss-container");
+        //     // dom.addEventListener("scroll", handleScroll);
         // });
 
         // 请求数据
@@ -128,6 +161,15 @@ export default defineComponent({
         //切换标题
         function handleNav(value: NavType): void {
             cardData.value = value.children;
+
+            //挂载后执行图片懒加载
+            nextTick(() => {
+                //绑定懒加载
+                new LazyImg({
+                    el: ".ss-container",
+                    src: "data-src" //存储图片路径的自定义属性
+                });
+            });
         }
 
         const isShowDialog = ref(false);
@@ -181,7 +223,11 @@ export default defineComponent({
             width: 90rem;
 
             .card-container {
-                // width: 90rem;
+                // width: 100%;
+                // height: 1000px;
+                width: 90rem;
+                height: 100%;
+
                 // // height: 20rem;
                 // margin: 0 auto;
             }
