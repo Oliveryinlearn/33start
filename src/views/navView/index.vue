@@ -29,7 +29,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, getCurrentInstance } from "vue";
 //引入类型
 import { navList } from "./types/type";
 //引入路由函数
@@ -42,7 +42,12 @@ export default defineComponent({
         const router = useRouter();
 
         const nav: navList[] = ["首页", "便签"];
-        const selectedNav = ref<navList>(nav[0]);
+
+        const curRoute = window.location.pathname;
+
+        const navCur = curRoute === "/discover" ? nav[1] : nav[0];
+
+        const selectedNav = ref<navList>(navCur);
 
         /**
          * 点击nav上的标签触发事件

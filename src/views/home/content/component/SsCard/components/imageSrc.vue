@@ -7,8 +7,9 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, watch } from "vue";
 import { randomNum } from "@/utils";
+import { setTimeout } from "timers";
 
 const url = `https://picsum.photos/220/220?random=`;
 
@@ -45,6 +46,16 @@ export default defineComponent({
             // return require(`../../../../../../assets/images/${src}`);
             return url + randomNum(1, 100);
         }
+
+        /**
+         * 监听数据是否发生变化
+         */
+        watch(
+            () => props.data,
+            value => {
+                imgDom.value.style.opacity = 0;
+            }
+        );
 
         return {
             handleUrl,

@@ -2,12 +2,14 @@
     <div class="ss-home">
         <!--导航-->
         <nav-view/>
-
+        <!--主体-->
         <suspense>
             <div class="ss-content-blog">
-                <keep-alive>
-                    <router-view></router-view>
-                </keep-alive>
+                <router-view v-slot="{Component}">
+                    <keep-alive>
+                        <component :is="Component"/>
+                    </keep-alive>
+                </router-view>
             </div>
         </suspense>
     </div>
@@ -15,6 +17,7 @@
 
 <script lang='ts'>
 import { defineComponent } from "vue";
+
 //引入导航
 import NavView from "./navView/index.vue";
 
@@ -22,20 +25,6 @@ export default defineComponent({
     components: {
         NavView
     }
-    // data() {
-    //     return {
-    //         bsDom: null
-    //     };
-    // }
-    // methods: {
-    //     initScroll() {
-    //         const dom: any = this.$refs.sSContent;
-    //         new BScroll<any>(dom);
-    //     }
-    // },
-    // mounted() {
-    //     this.initScroll();
-    // }
 });
 </script>
 
