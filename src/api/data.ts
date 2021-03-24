@@ -7,3 +7,11 @@ export function getData(params: any) {
 		params
 	});
 }
+
+export function getDisCoverData(params: any) {
+	return request({
+		url: "/mock/discover.json",
+		method: "get",
+		params
+	});
+}

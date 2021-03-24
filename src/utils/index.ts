@@ -151,3 +151,67 @@ export class LazyImg {
 //生成随机图片的网站
 export const url = `https://picsum.photos/220/220?random=`;
 export const urlArr = `https://picsum.photos/220/96?random=`;
+
+/**
+ * 多行文字处理
+ * @param {string} content 处理的最大文字数量
+ * @param {number} max 处理的最大文字数量
+ */
+export function maxText(content: string, max: number) {
+	const maxNumber = max;
+
+	//判断是否是字符串
+	if (typeof content !== "string") {
+		console.error("处理内容必须是字符串格式");
+		return null;
+	}
+
+	//判断长度是否符合要求
+	if (content.length < maxNumber) {
+		return content;
+	} else {
+		return content.substring(0, maxNumber) + "...";
+	}
+}
+
+/**
+ * 操作localStorage
+ */
+export class HandleLocalStroage {
+	value: string;
+	constructor(value: string) {
+		this.value = value;
+	}
+	/**
+	 * 获取存储的
+	 */
+	getLocalStrage() {
+		const getStrage: string | null = localStorage.getItem(this.value);
+		//转换
+		// const getStrageArr = ;
+		return getStrage ? JSON.parse(getStrage) : [];
+	}
+	/**
+	 * 设置
+	 */
+	setLocalStrage(data: any) {
+		const curData: any = this.getLocalStrage();
+		let setDataArr = [],
+			setJsonStr = null;
+		// let setJsonStr = null;
+		if (curData.length === 0) {
+			//保存一个新数组
+			setDataArr.push(data);
+			//转成json字符串
+			setJsonStr = JSON.stringify(setDataArr);
+		} else {
+			//将存储的转成数组对象，且添加新内容
+			setDataArr = curData.unshift(data);
+			//转成json字符串
+			setJsonStr = JSON.stringify(setDataArr);
+		}
+
+		//存储
+		localStorage.setItem(this.value, setJsonStr);
+	}
+}

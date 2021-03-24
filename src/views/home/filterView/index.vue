@@ -115,6 +115,7 @@ export default defineComponent({
 
             height: 100%;
             margin-right: 3.5rem;
+            padding: 0.8rem 0;
             // flex: 1;
 
             color: $main-text;

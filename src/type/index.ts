@@ -36,3 +36,23 @@ export interface FilterNav {
 	nav: Filter[];
 	selected: string;
 }
+
+//便签类型
+export interface DiscoverType {
+	state: string;
+	text: string;
+}
+
+//便签表单
+export interface formData {
+	title: string;
+	state: string;
+	desc: string;
+	label: string;
+}
+
+//便签类型
+export interface LabelType {
+	title: string;
+	id: string;
+}
